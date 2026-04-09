@@ -22,15 +22,34 @@ We will also need a table (see `init.sql`) in order to store some metadata for e
 
  -->
 
-<?php
-$page_title = "Upload Image Files";
-include "include/header.php";
-?>
+ <?php
+ $page_title = 'Upload Image Files';
+
+ include 'includes/header.php';
+
+ include 'includes/upload.php';
+ ?>
+
 <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" enctype="multipart/form-data">
 
-
+    <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" id="title" name="title" class="form-control" value="<?= $title; ?>">
+    </div>
+    <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <input type="text" id="description" name="description" class="form-control" value="<?= $description; ?>">
+    </div>
+    <div class="mb-3">
+        <label for="file" class="form-label">file</label>
+        <input type="file" id="file" name="file" class="form-control" accept=".png, .jpg, .jpeg, .webp, .avif">
+        <p class="form-text">The following file types are accepted: AVIF, JPG, JPEG, PNG, WEBP</p>
+    </div>
+    <input type="submit" value="Upload Image" class="btn btn-primary" name="submit">
 </form>
 
 <?php
-include "include/footer.php";
-?>
+
+ include 'includes/footer.php';
+
+ ?>

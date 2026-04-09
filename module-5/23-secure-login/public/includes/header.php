@@ -11,6 +11,17 @@
     <body class="container p-3">
         <header class="text-center my-5">
             <!-- Navigation will go here. -->
+             <nav>
+                <a class="btn btn-dark" href="index.php">Home</a>
+                <?php if (isset($_SESSION['user_id'])) : ?>
+                    <a class="btn btn-outline-secondary" href="admin.php">Admin</a>
+                    <a class="btn btn-danger" href="logout.php">Logout</a>
+                <?php else : ?>
+                    <a class="btn btn-outline-success" href="login.php">Login</a>
+                <?php endif; ?>
+                
+                
+             </nav>
         </header>
         <main class="my-5">
             <!-- Introduction -->
