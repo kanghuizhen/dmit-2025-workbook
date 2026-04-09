@@ -4,6 +4,21 @@ Often, displaying all of the data that we have doesn't make for a good user expe
 
 Instead, we can display a few columns to the user and have a separate page that retrieves all of the information for a single record. This can make things less overwhelming.
 
+However, before we get into our lesson, we need to review a major security risk for all web applications: SQL Injections. 
+
+---
+
+## Table of Contents
+
+- [SQL Injections](#sql-injections)
+  - [How do SQL Injections work?](#how-do-sql-injections-work)
+  - [How do we prevent SQL Injections?](#how-do-we-prevent-sql-injections)
+  - [PHP built‑in functions](#php-built‑in-functions)
+- [Prepared SQL Statements](#prepared-sql-statements)
+  - [Example](#example)
+  - [Prepared Statements and SQL Injections](#prepared-statements-and-sql-injections)
+- [tl;dr](#tldr)
+
 ---
 
 ## SQL Injections
@@ -137,3 +152,42 @@ In this example, if we were to concatenate the user-provided $username variable 
 ## tl;dr
 
 Prepared statements make web applications safer by separating the SQL query from user input, and properly sanitizing and escaping the input before it is added to the query. This ensures that user input is treated as data rather than as part of the SQL query, eliminating the possibility of SQL injection attacks.
+
+---
+
+## Getting Started
+
+In this module, we will be progressively adding features to a read-only application. Today, we'll be setting up the files and basic format that we need, then completing new pages and features as we work through Lessons 13-16.
+
+
+### Today's Files
+
+Today, we'll be working with the following files:  
+
+```sh
+/13-single-record-view
+    /private
+        happiness_index.sql			# The dataset we'll be working with for this application, the Happy Planet Index. 
+	/public
+		/includes
+			country-card.php		# A reusable component for displaying a single record.
+			footer.php
+			header.php
+		country.php					# A single-record view (i.e. all of the information for a single record).
+		filters.php					# Clickable filters that can be applied to our dataset.
+		index.php					# Lists all of the records currently in the database.
+		search.php					# An advanced search form, where users may pick and choose which fields to fill out.
+```
+
+
+### Our Dataset
+
+We will be using the Happy Planet Index, an openly available dataset that tracks "sustainable wellbeing, evaluating countries by how efficiently they deliver long, happy lives for their residents using our limited environmental resources"[^1]. We are using this dataset because it offers a mix of different data types (strings, floats, integers) and is a manageable size (i.e. there are enough records for us to meaningfully filter and paginate the data, but there aren't so many rows that it impacts application performance).
+
+It is maintained by the Hot or Cool Institute gGmbH and can be accessed in full [through their website](https://happyplanetindex.org/).
+
+---
+
+## Footnotes
+
+[^1] [What is the Happy Planet Index?](https://happyplanetindex.org/learn-about-the-happy-planet-index/)

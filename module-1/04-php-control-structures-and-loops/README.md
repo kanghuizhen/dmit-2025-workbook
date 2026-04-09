@@ -8,7 +8,7 @@ Determining whether something is TRUE or FALSE is the root of all decision makin
 
 ### Equality
 
-We can evaluate equality with `==`. This will check to see whether the values on either side of the operator are equivalents. 
+We can evaluate equality with `==`. This will check to see whether the values on either side of the operator are equivalents.  
 
 ```PHP
     42 == 42; // This would evaluate as TRUE.

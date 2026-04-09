@@ -2,26 +2,39 @@
     This script will create a table in our database and add some data to it. Even if you use the GUI to create tables and records in PHPMyAdmin, it's a good idea to keep a copy of your original script, just in case something happens and you have to drop the table and start again.
 */
 
--- All queries have a certain order to them. This one, which you'll complete with your instructor, creates a table, defines all of its columns, and determines which data type each column will be. We also have to decide whether a column allows null data and what the primary key is. 
+-- All queries have a certain order to them. This one creates a table, defines all of its columns, and determines which data type each column will be. We also have to decide whether a column allows null data and what the primary key is. 
 
 CREATE TABLE cities (
-    
+    cid SMALLINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    city_name VARCHAR(36) NOT NULL,
+    province ENUM('AB', 'BC', 'MB', 'NB', 'NL', 'NS', 'ON', 'PE', 'QC', 'SK', 'NT', 'NU', 'YT') NOT NULL,
+    population INT UNSIGNED NOT NULL,
+    is_capital BOOLEAN NOT NULL DEFAULT FALSE,
+    trivia VARCHAR(255) NULL
 );
 
 /*
     In this statement:
 
-    1. The cid column is defined as an integer (INT) and marked as the primary key (PRIMARY KEY). It also has the AUTO_INCREMENT attribute, which means the values will automatically increment for each new row inserted.
+    1. The cid column is defined as a small integer (SMALLINT) and marked as the primary key (PRIMARY KEY). It also has the AUTO_INCREMENT attribute, which means the values will automatically increment for each new row inserted.
+
+        Note: Why SMALLINT? There are currently 5,126 municipalities in Canada. An unisgned SMALLINT will give us room to store 0 - 65,535 records.
+
+        What's an unisgned value? This means it can only be a positive number or 0, not a negative value. 
     
     2. The city_name column is defined as a variable-length string (VARCHAR) with a maximum length of 36 characters. The NOT NULL constraint ensures that this column must have a value and cannot be left empty.
 
         Note: Why 36 characters? The longest location name in Canada is 'Pekwachnamaykoskwaskwaypinwanik Lake', which is 36 characters long. 
     
-    3. The province column is defined as a variable-length string (VARCHAR) with a length of 3 characters. The NOT NULL constraint is applied to enforce that this column must have a value.
-    
-    4. The population column is defined as an integer (INT) with a length of 10 digits. The NOT NULL constraint is applied to ensure this column must have a value.
+    3. The province column is defined as an enumerated value (ENUM). Because there are exactly thirteen provinces and territories to choose from, we can clearly define what they are and accept only one of these thirteen values. The NOT NULL constraint is applied to enforce that this column must have a value.
 
-    5. The is_capital column is BOOLEAN value, which can be TRUE or FALSE, or a 0 or 1. Each city either is (TRUE or 1) or isn't (FALSE or 0) a capital of its province or territory. 
+        Note: ENUM is important for data normalisation. If we defined this column as a VARCHAR, we might get all sorts of values for what we, as humans, we see as equivalent values (ex. NWT, NW Territories, Northwest Territories, North West Territories, northwest territories), but that computer systems would see as distinct strings. This eliminates the possibility that a user might enter the exact same thing multiple different ways.  
+    
+    4. The population column is defined as a unsigned integer (INT), which can range from 0 - 4,294,967,295 (or half the population of the world). The NOT NULL constraint is applied to ensure this column must have a value.
+
+        Note: If we used a signed integer here, we'd could only go up to half that amount and dip into negatives (a range of -2,147,483,648 to 2,147,483,648). This is still much larger than we need, but we want to prevent negative population values. 
+
+    5. The is_capital column is BOOLEAN value, which can be TRUE or FALSE, or a 0 or 1. Each city either is (TRUE or 1) or isn't (FALSE or 0) a capital of its province or territory. By default (if no value is given or specified), this field will be set to FALSE.
 
     By including the NOT NULL constraint for each column, you enforce that none of the columns can be left empty when inserting data into the table. However, the sixth column is unique. 
 
@@ -74,6 +87,3 @@ INSERT INTO cities (city_name, province, population, is_capital, trivia) VALUES
 ('Yellowknife', 'NT', 20116, TRUE, 'Famous for aurora viewing and located on the edge of the Canadian Shield'),
 
 ('Iqaluit', 'NU', 7740, TRUE, 'Home to unique Arctic culture and scenic landscapes');
-
-
-/* We'll go over INSERT statements and even write some of our own in our next file. */

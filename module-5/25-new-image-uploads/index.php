@@ -22,6 +22,15 @@ We will also need a table (see `init.sql`) in order to store some metadata for e
 
  -->
 
- <?php
- 
- ?>
+<?php
+$page_title = "Upload Image Files";
+include "include/header.php";
+?>
+<form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post" enctype="multipart/form-data">
+
+
+</form>
+
+<?php
+include "include/footer.php";
+?>

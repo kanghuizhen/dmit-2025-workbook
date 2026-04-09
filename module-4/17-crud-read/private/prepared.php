@@ -17,4 +17,36 @@
     8. Close the prepared statement after finished to free up server resources.
 */
 
+
+function get_all_cities() {
+    $query = "SELECT * FROM cities";
+    $result = execute_prepared_statement($query);
+
+    return $result->fetch_all(MYSQLI_ASSOC);
+}
+
+function execute_prepared_statement($query, $parameters = [], $types = "") {
+    global $connection;
+
+    $statement = $connection->prepare($query);
+
+    if (!$statement) {
+        die("Preparation failed: " . $connection->error);
+    }
+
+    // ... is the splat or spread operator to unpack an array of any size
+    if (!empty($parameters)) {
+        $statement->bind_param($types, ...$parameters);
+    }
+
+    if (!$statement->execute()) {
+        die("Execution failed: " . $statement->error);
+    }
+
+    if (str_starts_with($query, "SELECT")) {
+        return $statement->get_result();
+    }
+
+    return true;
+}
 ?>

@@ -2,7 +2,7 @@
 
 Databases will allow us to read and write data, store more data, and keep it organised (so that we can access it faster). In this lesson, we'll be setting up our database and go over some basic instructions we can give it so that we can read, add, update, and delete data. 
 
-**Note**: If you are unclear about any of the software or tools we'll be using today and what their role is in our web applications, refer back to the `README.md` for [Lesson 1: PHP Environment Setup](../../module-0/01-environment-setup/README.md).
+**Note**: If you are unclear about any of the software or tools we'll be using today and what their role is in our web applications, refer back to the `README.md` for [Lesson 1: PHP Environment Setup](../../module-0/01-local-environment-setup/README.md).
 
 
 ## Terminology 
@@ -53,16 +53,56 @@ We're going to be using MySQL through phpMyAdmin. This is a web-based interface 
 We will also be learning how to write PHP applications that allow us to access our MySQL databases and issue similar commands. For example, if a user wishes to register, we might allow them to do so through a web form that creates a username, password, and so forth for them to use. 
 
 
-## How do we use phpMyAdmin?
+## Is there anything different about MySQL or MariaDB that I need to know?
 
-First, it needs to be installed on a server somewhere. If you successfully installed PHPMyAdmin at the beginning of the term, you've already completed this step.
+There may be a few data types that you haven't come across yet, or MariaDB may have slightly different aggregate functions from what you're used to. This is because in DMIT1508 - Database Fundamentals I, you learn a 'Microsoft-flavoured' version of SQL; here, we'll be learning an 'Oracle-flavoured' one.
 
-Next, go to the following URL: [phpMyAdmin](dmitstudent.ca/phpmyadmin)
 
-You will be prompted for your username and the password that you use to access FileZilla. After that, you'll be greeted with our DBMS (Database Management System). On the left-hand side will be a list of all of your databases, with different operations along the top right.
+### Integers
 
-However, you won't be able to do much without first creating a database. To do that, head to [Virtualmin](https://studentweb2.sicet.ca:10000/).
+In the current version of MySQL, display lengths are ignored for integers. This means that if I do the following: 
 
-Select the third option down ('Edit Databases'). Next, choose 'Create a new database'. Name this database after the course code and your section number, such as: dmit2025_e01
+```SQL
+CREATE TABLE users (
+  `pid` INT(3) AUTO_INCREMENT PRIMARY KEY,
+  ... 
+);
+```
 
-Now that you've got your first database, head back to PHPMyAdmin to get started with our SQL review.
+... our DBMS will ignore the display length (3). This means that we are not creating a column whose values range from 0-999, we are creating a column that ranges from -2,147,483,648 to 2,147,483,647.
+
+So, instead of display lengths, we can use discrete integer data types. 
+
+TINYINT
+  - 1 byte
+  - signed: -128 to 127
+  - unsigned: 0 to 255
+
+SMALLINT
+  - 2 bytes
+  - signed: -32,768 to 32,767
+  - unsiged: 0 to 65,535
+        
+MEDIUMINT
+    - 3 bytes
+    - signed: -8,388,608 to 8,388,607
+    - unsigned: 0 to 16,777,215
+        
+INT
+    - 4 bytes
+    - signed: -2,147,483,648 to 2,147,483,647
+    - unsigned: 0 to 4,294,967,295
+        
+BIGINT
+    - 8 bytes
+    - signed: -9,223,372,036,854,775,808 to 9,223,372,036,854,775,807
+    - unsigned: 0 to 18,446,744,073,709,551,615
+
+Remember that we should always use the smallest data type possible when storing anything. This will allow us to keep our database quick and responsive, especially when handling multiple requests at a time.
+
+
+#### Signed and Unsigned Values
+ 
+For each numerical data type, there are signed and unsigned values. Signed values can be negative, while unsigned values start at zero and can only be positive.
+
+Because of this, the maximum value of a signed number will be half the maximum value of an unsigned number.

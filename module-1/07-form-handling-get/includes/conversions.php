@@ -1,67 +1,55 @@
 <?php
 
-// Normally, we'd perform these calculations on the fly with a custom function; however, since we won't get there until Lesson 09, this is a big long array to store all of our pre-converted values for us. 
+// This file takes all of the required ingredients and quantities from the original recipe and converts it into a two-dimensional array. This allows us to calculate the quantities we need based upon the user's input.
 
 $ingredients = [
     [
        'base_quantity' => 1,
-       'unit'          => 'cup',
-       'name'          => 'white sugar'
+       'ingredient'    => 'cup(s) white sugar'
     ],
     [
        'base_quantity' => 0.5,
-       'unit'          => 'cup',
-       'name'          => 'unsalted butter, softened'
+       'ingredient'    => 'cup(s) unsalted butter, softened'
     ],
     [
        'base_quantity' => 2,
-       'unit'          => 'large',
-       'name'          => 'eggs'
+       'ingredient'    => 'large eggs'
     ],
     [
        'base_quantity' => 1,
-       'unit'          => 'teaspoon',
-       'name'          => 'vanilla extract'
+       'ingredient'    => 'teaspoon(s) vanilla extract'
     ],
     [
        'base_quantity' => 3,
-       'unit'          => '',
-       'name'          => 'ripe bananas, mashed'
+       'ingredient'    => 'ripe bananas, mashed'
     ],
     [
        'base_quantity' => 1,
-       'unit'          => 'teaspoon',
-       'name'          => 'cinnamon'
+       'ingredient'    => 'teaspoon(s) cinnamon'
     ],
     [
        'base_quantity' => 2,
-       'unit'          => 'cups',
-       'name'          => 'all-purpose flour'
+       'ingredient'    => 'cup(s) all-purpose flour'
     ],
     [
        'base_quantity' => 1,
-       'unit'          => 'teaspoon',
-       'name'          => 'baking powder'
+       'ingredient'    => 'teaspoon(s) baking powder'
     ],
     [
        'base_quantity' => 1,
-       'unit'          => 'teaspoon',
-       'name'          => 'baking soda'
+       'ingredient'    => 'teaspoon(s) baking soda'
     ],
     [
        'base_quantity' => 1,
-       'unit'          => 'pinch',
-       'name'          => 'salt'
+       'ingredient'    => 'pinch(es) of salt'
     ],
     [
        'base_quantity' => 0.5,
-       'unit'          => 'cup',
-       'name'          => 'old-fashioned oats'
+       'ingredient'    => 'cup(s) old-fashioned oats'
     ],
     [
        'base_quantity' => 0.5,
-       'unit'          => 'cup',
-       'name'          => 'chopped walnuts'
+       'ingredient'    => 'cup(s) chopped walnuts'
     ]
 ];
 
